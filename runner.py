@@ -1,3 +1,6 @@
-from lib.parser import hello
+#!/usr/bin/env python
+from lib.cli import run
+import json
 
-hello()
+data = run('list-sinks')
+print(json.dumps(data, indent=2))
