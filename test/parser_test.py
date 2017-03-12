@@ -214,6 +214,9 @@ class TestStringMethods(unittest.TestCase):
     def test_capturesProperties(self):
         self.assertEquals(self.data['2']['properties']['sysfs.path'], '/devices/pci0000:00/0000:00:14.2/sound/card1')
 
+    def test_supportsMultiline(self):
+        self.assertTrue('\nbalance' in self.data['0']['volume'])
+
     def test_indexedCorrectly(self):
         self.assertTrue(self.data['9']['name'] == '<alsa_output.usb-Logitech_Logitech_G930_Headset-00.iec958-stereo>')
         self.assertTrue(self.data['0']['name'] == '<alsa_output.pci-0000_01_00.1.hdmi-stereo>')
