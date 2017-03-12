@@ -208,6 +208,9 @@ class TestStringMethods(unittest.TestCase):
     def test_correctActive(self):
         self.assertTrue(self.data['activeItem'] == '2')
 
+    def test_capturesAttributesWithSpaces(self):
+        self.assertTrue(self.data['2']['max request'] == '6 KiB')
+
     def test_indexedCorrectly(self):
         self.assertTrue(self.data['9']['name'] == '<alsa_output.usb-Logitech_Logitech_G930_Headset-00.iec958-stereo>')
         self.assertTrue(self.data['0']['name'] == '<alsa_output.pci-0000_01_00.1.hdmi-stereo>')

@@ -13,7 +13,7 @@ def parseList(output):
     currentIndex = -1
 
     patternNewItem = re.compile('(\* )?index: (\d+)')
-    patternKeyValue = re.compile('\t?([\S]+): (.+)')
+    patternKeyValue = re.compile('\t*([^:]+): (.+)')
 
     for line in lines:
         matchNewItem = patternNewItem.search(line)
