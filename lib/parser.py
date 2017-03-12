@@ -7,6 +7,7 @@ def parseList(output):
     data = {}
 
     currentItem = {}
+    currentIndex = -1
 
     patternNewItem = re.compile('(\* )?index: (\d+)')
     patternKeyValue = re.compile('\t?([\S]+): (.+)')
@@ -20,8 +21,11 @@ def parseList(output):
             index = matchNewItem.group(2)
 
             # Finalize object and reset
-            data[index] = currentItem
-            currentItem = {}
+            if currentIndex != -1:
+                data[currentIndex] = currentItem
+                currentItem = {}
+
+            currentIndex = index
 
             if isActive:
                 data['activeItem'] = index
@@ -31,5 +35,7 @@ def parseList(output):
             parsedValue = matchKeyValue.group(2)
             currentItem[parsedKey] = parsedValue
 
+    # Last item will need to be pushed manually
+    data[currentIndex] = currentItem
 
     return data
