@@ -193,6 +193,9 @@ mockOutput = """
 	active port: <iec958-stereo-output>
 """
 
+badCommand = """Unknown command: obviously-fake
+"""
+
 from parser import parseList
 import json
 import unittest
@@ -208,6 +211,12 @@ class TestStringMethods(unittest.TestCase):
     def test_indexedCorrectly(self):
         self.assertTrue(self.data['9']['name'] == '<alsa_output.usb-Logitech_Logitech_G930_Headset-00.iec958-stereo>')
         self.assertTrue(self.data['0']['name'] == '<alsa_output.pci-0000_01_00.1.hdmi-stereo>')
+
+    def test_raises(self):
+        with self.assertRaises(Exception) as context:
+            parseList(badCommand)
+
+        self.assertTrue(str(context.exception).startswith('Unknown command'))
 
 if __name__ == '__main__':
     unittest.main()

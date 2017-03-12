@@ -4,6 +4,9 @@ def parseList(output):
     lines = output.split('\n')
     first = lines.pop(0)
 
+    if first.startswith('Unknown command'):
+        raise Exception(first)
+
     data = {}
 
     currentItem = {}
